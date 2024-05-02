@@ -11,15 +11,37 @@
     {
         static void Main(string[] args)
         {
-            Student student = new Student()
+            Student student1 = new Student()
+            {
+                Id = 35,
+                Name = "Masud",
+                Age = 25,
+            };
+            Student student2 = new Student()
             {
                 Id = 38,
                 Name = "Parvez",
-                Age = 25,
-            }; 
-            Console.WriteLine(student.Id);
-            Console.WriteLine(student.Name);
-            Console.WriteLine(student.Age);
+                Age = 26,
+            };
+
+            List<Student> studentList = new List<Student>()
+            {
+                student1,
+                student2,
+                new Student() {Id = 15, Name = "Rifat", Age = 20},
+            };
+            Student student4 = new Student()
+            {
+                Id = 21,
+                Name = "Saif",
+                Age = 21,
+            };
+            studentList.Add(student4);
+
+            foreach (var i in studentList)
+            {
+                Console.WriteLine($"{i.Id} {i.Name} {i.Age}");
+            }
         }
     }
 }
