@@ -1,21 +1,32 @@
-﻿namespace Advance_CSharp
+﻿using System;
+namespace Advance_CSharp
 {
     internal class Program
     {
+        public delegate void Calculator(int num1, int num2);
         static void Main(string[] args)
         {
-            int[][] jarr = new int[2][];
-            jarr[0] = new int[3] { 1, 2, 3 };
-            jarr[1] = new int[5] { 1, 2, 3, 4, 5 };
+            //Calculator calculate = Add;
+            Calculator calculate = new Calculator(Add);
+            //Calculator calculate = (x, y) => Add(x, y);
 
-            for (int i = 0; i < jarr.Length; i++)
-            {
-                for (int j = 0; j < jarr[i].Length; j++)
-                {
-                    Console.Write(jarr[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
+        // calculate sum
+            calculate.Invoke(40, 12);
+            //calculate(40, 12);
+
+        // calculate sub
+            calculate = Sub;
+            calculate(40, 12);
+        }
+        public static void Add(int firstNumber, int secondNumber)
+        {
+            int ans = firstNumber + secondNumber;
+            Console.WriteLine("Sum of the result is {0}", ans);
+        }
+        public static void Sub(int firstNumber, int secondNumber)
+        {
+            int ans = firstNumber - secondNumber;
+            Console.WriteLine("Sub of the result is {0}", ans);
         }
     }
 }
