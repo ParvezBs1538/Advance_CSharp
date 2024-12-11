@@ -1,21 +1,36 @@
-﻿namespace Advance_CSharp
+﻿using System;
+namespace Advance_CSharp
 {
     internal class Program
     {
+        public delegate void Calculator<T, U>(T num1, U num2); 
+        // <T,U> means its can contains two difference or same type parameter
         static void Main(string[] args)
         {
-            int[][] jarr = new int[2][];
-            jarr[0] = new int[3] { 1, 2, 3 };
-            jarr[1] = new int[5] { 1, 2, 3, 4, 5 };
+            //Calculator<int, float> calculate = Add;
+            //Calculator<int, float> calculate = new Calculator<int, float>(Add<int, float>);
+            Calculator<int,float> calculate = (x, y) => Add(x, y);
 
-            for (int i = 0; i < jarr.Length; i++)
-            {
-                for (int j = 0; j < jarr[i].Length; j++)
-                {
-                    Console.Write(jarr[i][j] + " ");
-                }
-                Console.WriteLine();
-            }
+            // calculate sum
+            //calculate.Invoke(40, 12.5f);
+            calculate = Add<int, float>;
+            calculate(40, 12.5f);
+
+            // calculate sub
+            calculate = Sub<int, float>;
+            calculate(40, 20.5f);
+        }
+        public static void Add<T, U>(T firstNumber, U secondNumber)
+        {
+            dynamic n1 = firstNumber, n2 = secondNumber;
+            var ans = n1 + n2;
+            Console.WriteLine("Sum of the result is {0}", ans);
+        }
+        public static void Sub<T, U>(T firstNumber, U secondNumber)
+        {
+            dynamic n1 = firstNumber, n2 = secondNumber;
+            var ans = n1 - n2;
+            Console.WriteLine("Sub of the result is {0}", ans);
         }
     }
 }
